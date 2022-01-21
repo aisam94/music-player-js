@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  background-image: linear-gradient(teal, salmon);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /*alight left to right*/
+  justify-content: center; /* justify top to bottom*/
+}
+
+.music-container {
+  background-color: white;
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 10px 10px 0 rgb(54, 3, 3);
+  display: flex;
+  width: 300px;
+  padding: 20px 20px;
+  margin: 150px 0; /*should be same as image height plus some more*/
+  position: relative; /*in order to position the elements inside it*/
+  z-index: 10;
+}
+
+/* Image */
+.image-container {
+  position: relative;
+  width: 150px;
+  height: 10px;
+  margin: 10px 10px 60px 10px;
+}
+
+.image-container img {
+  width: inherit;
+  height: 150px; /* same as width in img container*/
+  border-radius: 50%;
+  object-fit: cover; /* make image not stretched to fill circle */
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: rotate 3s linear infinite;
+  animation-play-state: paused;
+}
+
+.img-container::after {
+  content: "";
+  background-color: white;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%); /**/
+}
+
+.image-container.play img {
+  animation-play-state: running; /*adding play class animate it*/
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0 deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 100%;
+}
+
+/* Buttons */
+.action-btn {
+  background-color: white;
+  border: 0;
+  color: #dfdbdf;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 0 20px;
+}
+
+.action-btn-big {
+  color: #cdc2d0;
+  font-size: 30px;
+}
+
+.action-btn:focus {
+  outline: 0; /*prevent outline if click on button*/
+}
+
+/* Music Info */
+.music-info {
+  background-color: teal;
+  border-radius: 15px 15px 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /*40 is double the left value*/
+  opacity: 0;
+  padding: 5px;
+  transform: translateY(0%);
+  transition: transform 0.3s ease-in, opacity 0.1s ease-in;
+}
+.music-info h4 {
+  margin: 0;
+  text-align: center;
+}
+
+.music-container.play .music-info {
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+/* Progress */
+.progress-container {
+  background-color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 4px;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  background-color: salmon;
+  border-radius: 5px;
+  height: 100%;
+  width: 0%;
+  transition: width 0.1s linear;
+}
